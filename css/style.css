@@ -1,7 +1,41 @@
-html {
-  box-sizing: border-box;
+body {
+  height:100%;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
+html {
+  height:100%;
 }
+
+#map {
+  height:100%;
+
+}
+
+.container {
+  position: absolute;
+  top:4em;
+  right: 0;
+  left: 0;
+}
+.controls {
+  background-color: rgba(255, 255, 255, .7);
+  border: 2px solid;
+  border-radius: 3px;
+  height: auto;
+  position: absolute;
+  text-align: center;
+
+}
+
+#radius .slider-selection {
+  background: #BABABA;
+}
+
+.controls #search-radius {
+  margin-top: .5em;
+}
+
+.controls #find-trails {
+  margin: 1em 0 1em;
+}
+
