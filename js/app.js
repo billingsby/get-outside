@@ -40,6 +40,39 @@ var geoCode = function(inputAddress) {
 };
 
 
+$.fn.stars = function(rating) {
+  console.log(rating);
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat(rating);
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
+
+
+var showInfo = function(places) {
+  // var result = $('.template #popup').clone();
+  
+  var trail = '<h3>' + places.name + '</h3>';
+  var thumb = '<div class="thumb"><img src="' + places.activities[0].thumbnail + '"></div>'
+  var description = '<h4>Description</h4><p>' + places.activities[0].description + '</p>'
+  var distance = '<ul class="list-unstyled list-inline"><li><h5>' + places.activities[0].length + ' Miles</h5></li>';
+  var stars = '<li><span class="stars">' + numStars + '</span></li></ul>';
+    var numStars = $(function() {
+    $('span.stars').stars(places.activities[0].rating);
+});
+  var result = trail + thumb + distance + stars + description;
+  
+  return result;
+
+};
+
+
 // Get activity selected
  function activity() {
   if ($('#hike').click('clicked')) {
@@ -75,12 +108,18 @@ $.ajax({
   $.each(result.places, function(i, places) {
     var lat = places.lat;
     var lon = places.lon;
-   
+    var info = showInfo(places);
+    
      var marker = new L.marker([lat, lon]).addTo(map);
+     marker.bindPopup(info, {
+        closeButton: false,
+        minWidth: 320
+      });
+  
   });
     
     
-  })
+  });
 };
 
 

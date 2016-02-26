@@ -6,6 +6,10 @@ html {
   height:100%;
 }
 
+.hidden {
+  display: none;
+}
+
 #map {
   height:100%;
 
@@ -37,5 +41,26 @@ html {
 
 .controls #find-trails {
   margin: 1em 0 1em;
+}
+
+.thumb {
+  margin: 0 auto;
+  width:300px;
+  height: auto;
+}
+
+.thumb img {
+  width: 100%;
+}
+
+span.stars, span.stars span {
+    display: block;
+    background: url('..images/stars.gif') -22 -0px repeat-x;
+    width: 22px;
+    height: 22px;
+}
+
+span.stars span {
+    background-position: 0 0;
 }
 
