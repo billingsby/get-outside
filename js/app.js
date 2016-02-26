@@ -3,28 +3,38 @@
 var map;
 var radius;
 var activity = "hiking";
-var inputAddress;
-var latitude;
-var longitude;
+var latitude = 39.833;
+var longitude = -98.583﻿;
+
 
 
 // Find initial location and load map
 function initialize(location) {
-  inputAddress = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-  latitude = inputAddress.lat();
-  console.log(inputAddress);
-  console.log(latitude);
-  longitude = inputAddress.lng();
-  
-  var mapOptions = { 
-    zoom:8, 
-    mapTypeId: google.maps.MapTypeId.TERRAIN, 
-    center: inputAddress 
-  };
-    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  map = L.map('map').setView([latitude, longitude], 4);
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'billingsby.p8gk9ma9',
+    accessToken: 'pk.eyJ1IjoiYmlsbGluZ3NieSIsImEiOiJjaWwybmpzZHEzZzZ5dW1rczR1NnQzOWVyIn0.kI9i7wGvEUIUOuKzZiGRDg'
+}).addTo(map);
 
-    
+
 }
+var geoCode = function(inputAddress) {
+  var geocoder = new google.maps.Geocoder();
+  var geocoderRequest = { 
+    address: inputAddress 
+  };
+  geocoder.geocode(geocoderRequest, function(results, status){
+    console.log(results);
+    latitude = results[0].geometry.location.lat();
+    longitude = results[0].geometry.location.lng();
+    map.panTo(new L.LatLng(latitude, longitude));
+    map.zoomIn(6);
+
+});
+}
+
+
 // Get activity selected
  function activity() {
   if ($('#hike').click('clicked')) {
@@ -35,14 +45,12 @@ function initialize(location) {
     }
   };
 
-// EveryTrail request
+// Trails request
 var getTrails = function() {
 var params = {
   'q[activities_activity_type_name_eq]': activity,
-  // lat: latitude,
-  // lon: longitude,
-  'q[city_cont]': 'Denver',
-  'q[state_cont]': 'Colorado',
+  lat: latitude,
+  lon: longitude,
   radius: radius
 }
 function setHeader(xhr) {
@@ -60,21 +68,16 @@ $.ajax({
     console.log(result);
     
     $.each(result.places, function(i, item) {
-      var markerPosition = {lat:item.lat , lng:item.lon};
-      console.log(markerPosition);
-       var marker = new google.maps.Marker({
-      position: markerPosition,
-      map: map,
-      title: 'Hello World!'
-  });
+     var lat = item.lat;
+     var lon = item.lon; 
+     console.log(lat);
+     console.log(lon);
+     var marker = new L.marker([lat, lon]).addTo(map);
+     
 
       
     });
   })
-  // .fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
-  //   var errorElem = showError(error);
-  //   $('.search-results').append(errorElem);
-  // });
 };
 
   
@@ -83,7 +86,7 @@ var mySlider = $('#radius').slider();
 
 // Call a method on the slider
 var radius = mySlider.slider('getValue');
-console.log(radius);
+
 $('.controls').on('slide', mySlider, function() {
   radius = mySlider.slider('getValue');
   $('#radius-num').text(radius);
@@ -93,9 +96,15 @@ $('.controls').on('slide', mySlider, function() {
 
 
 $(document).ready(function() {
-
-  navigator.geolocation.getCurrentPosition(initialize);
-  getTrails();
+  initialize();
+  // navigator.geolocation.getCurrentPosition(initialize);
+  $('.controls').on('click', '#find-trails', function(e) {
+    e.preventDefault();
+    var inputAddress = $('#address').val();
+    geoCode(inputAddress);
+    getTrails();
+  });
+  
 
   
 }());
