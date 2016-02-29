@@ -43,13 +43,13 @@ html {
   margin: 1em 0 1em;
 }
 
-.thumb {
+#thumb {
   margin: 0 auto;
   width:300px;
   height: auto;
 }
 
-.thumb img {
+#thumbnail {
   width: 100%;
 }
 

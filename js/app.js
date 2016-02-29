@@ -56,27 +56,32 @@ $.fn.stars = function(rating) {
 
 
 var showInfo = function(places) {
-  var result = $('.template #popup').clone();
+  // var result = $('.template .popup').clone();
   
-  var trail = result.find('#title');
-  trail.attr('h3', places.name);
+  // var trail = result.find('#title');
+  // trail.attr('h3', places.name);
 
-  var thumb = result.find('#thumb');
-  thumb.attr('src', places.activities[0].thumbnail); 
+  // var thumb = result.find('#thumb');
+  // thumb.attr('src', places.activities[0].thumbnail); 
 
-  var description = result.find('#trail-description');
-  description.attr('p', places.activities[0].description); 
+  // var description = result.find('#trail-description');
+  // description.attr('p', places.activities[0].description); 
 
-  var distance = result.find('#distance');
-  distance.text(places.activities[0].length + ' Miles');
+  // var distance = result.find('#distance');
+  // distance.text(places.activities[0].length + ' Miles');
 
-  var stars = result.find('.stars');
+  // var stars = result.find('.stars');
   var numStars = $(function() {
     $('span.stars').stars(places.activities[0].rating);
   });
-   stars.text(numStars);
+  //  stars.text(numStars);
+  var trail = '<div class="popup"><div id="title"><h3>' + places.name + '</h3></div>';
+  var thumb = '<div id="thumb"><img id="thumbnail" src="' + places.activities[0].thumbnail + '"></div>';
+  var distance = '<div id="stats"><ul class="list-unstyled list-inline"><li id="distance">' + places.activities[0].length + ' Miles</li>';
+  var stars = '<li id="rating><span class="stars">' + numStars + '</span></li></ul></div>';
+  var description = '<div id="description"><h4>Description</h4><p id="trail-description">' + places.activities[0].description + '</p></div></div>';
     
-  // var result = trail + thumb + distance + stars + description;
+  var result = trail + thumb + distance + stars + description;
   
   return result;
 
@@ -125,10 +130,7 @@ $.ajax({
         closeButton: false,
         minWidth: 320
       });
-  
-  });
-    
-    
+    });
   });
 };
 
