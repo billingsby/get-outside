@@ -40,21 +40,13 @@ var geoCode = function(inputAddress) {
 };
 
 
-$.fn.stars = function(rating) {
-  
-    return $(this).each(function() {
-        // Get the value
-        var val = parseFloat(rating);
-        // Make sure that the value is in 0 - 5 range, multiply to get width
-        var size = Math.max(0, (Math.min(5, val))) * 16;
-        // Create stars holder
-        var $span = $('<span />').width(size);
-        // Replace the numerical value with stars
-        $(this).html($span);
-    });
-}
+var starWidth = function(rating) {
+  console.log(rating);
+  var result = Math.round((rating/5)*100);
+  return result;
+};
 
-
+// Create popup content
 var showInfo = function(places) {
   // var result = $('.template .popup').clone();
   
@@ -71,14 +63,17 @@ var showInfo = function(places) {
   // distance.text(places.activities[0].length + ' Miles');
 
   // var stars = result.find('.stars');
-  var numStars = $(function() {
-    $('span.stars').stars(places.activities[0].rating);
-  });
-  //  stars.text(numStars);
+  // stars.html(numStars);
+
+  // var numStars = $(function() {
+    // $('span.stars').stars(places.activities[0].rating);
+  // });
+  console.log(places);
   var trail = '<div class="popup"><div id="title"><h3>' + places.name + '</h3></div>';
   var thumb = '<div id="thumb"><img id="thumbnail" src="' + places.activities[0].thumbnail + '"></div>';
-  var distance = '<div id="stats"><ul class="list-unstyled list-inline"><li id="distance">' + places.activities[0].length + ' Miles</li>';
-  var stars = '<li id="rating><span class="stars">' + numStars + '</span></li></ul></div>';
+  var distance = '<div id="stats"><ul class="list-unstyled list-inline"><li id="distance"><h5>' + places.activities[0].length + ' Miles</h5></li>';
+  var rating = starWidth(places.activities[0].rating);
+  var stars = '<li><div class="rating_bar"><div  class="rating" style="width:' + rating + ';"></div></div></li>';
   var description = '<div id="description"><h4>Description</h4><p id="trail-description">' + places.activities[0].description + '</p></div></div>';
     
   var result = trail + thumb + distance + stars + description;
@@ -124,12 +119,14 @@ $.ajax({
     var lat = places.lat;
     var lon = places.lon;
     var info = showInfo(places);
-    console.log(info);
+    
      var marker = new L.marker([lat, lon]).addTo(map);
+   
      marker.bindPopup(info, {
         closeButton: false,
         minWidth: 320
       });
+     
     });
   });
 };

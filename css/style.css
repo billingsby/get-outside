@@ -1,5 +1,6 @@
 body {
   height:100%;
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 html {
@@ -10,38 +11,94 @@ html {
   display: none;
 }
 
-#map {
+.map {
   height:100%;
+
 
 }
 
-.container {
+/*.navbar {
+    position: relative;
+  z-index: 999999;
+ float: left;*/
+  }
+ .nav {
+  height: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 999999;
+ }
+ .navbar-default {
+  margin: 0;
+ }
+
+.navbar-header h3{
+  margin: 0;
+  padding-left: 1em;
+  font-family: 'Knewave';
+ }
+
+
+
+ .navbar-header h3 small {
+  font-size: .5em;
+  font-family: 'PT Sans Narrow', sans-serif;
+ }
+
+ .nav img {
+  height: 4em;
+}
+
+.nav h4 {
+  line-height: 40px;
+  margin-left: 30px;
+}
+
+.nav li {
+  margin-top: 25px;
+}
+
+.nav #bike {
+  margin-left: 10px;
+}
+
+.nav #address {
+  margin: 12px 120px 0 10px;
+}
+
+.nav .search-distance {
+  margin: 12px 0 0 35px;
+  text-align: center;
+}
+
+.nav #find-trails {
+  margin-left: 15px;
+  /*margin-top: -10px;*/
+}
+
+/*.container {
   position: absolute;
   top:4em;
   right: 0;
   left: 0;
-}
-.controls {
+}*/
+/*.controls {
   background-color: rgba(255, 255, 255, .7);
   border: 2px solid;
   border-radius: 3px;
   height: auto;
   position: absolute;
-  text-align: center;
+  text-align: center;*/
 
 }
 
 #radius .slider-selection {
-  background: #BABABA;
+  background: #b7b7b7;
 }
 
-.controls #search-radius {
-  margin-top: .5em;
-}
 
-.controls #find-trails {
-  margin: 1em 0 1em;
-}
+
+
 
 #thumb {
   margin: 0 auto;
@@ -52,15 +109,22 @@ html {
 #thumbnail {
   width: 100%;
 }
-
-span.stars, span.stars span {
-    display: block;
-    background: url('..images/stars.gif') -22 -0px repeat-x;
-    width: 22px;
-    height: 22px;
+#stats #distance {
+  margin-left: 13px;
 }
-
-span.stars span {
+.rating_bar {
+    width: 80px;
+    height: 16px;
+    background: url(../images/stars.png);
+    background-repeat: repeat-x;
     background-position: 0 0;
+    text-align: left;
+   margin-left: 150px;
+    }
+.rating {
+    height: 16px;
+    background: url(../images/stars.png);
+    background-position: 0 -16px;
+    background-repeat: repeat-x;
 }
 
