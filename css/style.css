@@ -11,6 +11,11 @@ html {
   display: none;
 }
 
+a:hover {
+  text-decoration: none;
+  color: #0F93D6;
+}
+
 .map {
   height:100%;
   margin: 0;
@@ -23,24 +28,24 @@ html {
   border:0;
 }
 
+.outside-logo {
+  color: #23527C;
+}
+
 .logo{
  margin-bottom: 1.5em;
  font-size: 1.2em;
-
-}
+ }
 
 .outside-logo h3 {
   font-family: 'Merriweather', serif;
   font-size: 2em;
+
 }
 
 .controls {
   clear: both;
   padding-top: 2em;
-}
-
-.controls .activity #bike:active {
-  color: blue;
 }
 
 .controls img {
@@ -59,7 +64,6 @@ html {
   margin: 2em 0;
 }
 
-
 #thumb {
   margin: 0 auto;
   width:300px;
@@ -69,9 +73,11 @@ html {
 #thumbnail {
   width: 100%;
 }
+
 #stats #distance {
   margin-left: 13px;
 }
+
 .rating_bar {
     width: 80px;
     height: 16px;
@@ -86,5 +92,9 @@ html {
     background: url(../images/stars.png);
     background-position: 0 -16px;
     background-repeat: repeat-x;
+}
+
+.popup #trail-description br {
+  display: none;
 }
 

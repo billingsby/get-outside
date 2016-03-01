@@ -8,7 +8,6 @@ var longitude;
 var trails='';
 
 
-
 // Find initial location and load map
 function initialize(location) {
   latitude = 39.833;
@@ -33,28 +32,30 @@ var geoCode = function(inputAddress) {
     console.log(latitude);
     console.log(longitude);
     map.panTo(new L.LatLng(latitude, longitude));
-    map.zoomIn(6);
+    map.setZoom(10);
     getTrails(latitude, longitude);
   });
-  
 };
 
 
 var starWidth = function(rating) {
-  console.log(rating);
   var result = Math.round((rating/5)*100);
   return result;
 };
 
 // Create popup content
 var showInfo = function(places) {
-  
+
   var trail = '<div class="popup"><div id="title"><h3>' + places.name + '</h3></div>';
   var thumb = '<div id="thumb"><img id="thumbnail" src="' + places.activities[0].thumbnail + '"></div>';
   var distance = '<div id="stats"><ul class="list-unstyled list-inline"><li id="distance"><h5>' + places.activities[0].length + ' Miles</h5></li>';
   var rating = starWidth(places.activities[0].rating);
   var stars = '<li><div class="rating_bar"><div  class="rating" style="width:' + rating + ';"></div></div></li>';
-  var description = '<div id="description"><h4>Description</h4><p id="trail-description">' + places.activities[0].description + '</p></div></div>';
+  var descriptionResult = places.activities[0].description;
+  var descriptionFormat = descriptionResult.replace(/[<]br[^>]*[>]/gi,"");
+  descriptionFormat = descriptionFormat.replace(/&lt;br \/&gt;/g,"");
+  console.log(descriptionFormat);
+  var description = '<div id="description"><h4>Description</h4><p id="trail-description">' + descriptionFormat + '</p></div></div>';
   
   if (places.activities[0].thumbnail == null) { 
     var result = trail + distance + stars + description;
@@ -66,8 +67,6 @@ var showInfo = function(places) {
 };
 
 
-
-
 // Trails request
 var getTrails = function(latitude, longitude) {
 var params = {
@@ -76,7 +75,7 @@ var params = {
   lon: longitude,
   radius: radius
 }
-console.log(params);
+
 function setHeader(xhr) {
   xhr.setRequestHeader('X-Mashape-Key', '4YanT409HXmshDOtn4QkTe1DNY33p1EVI2VjsnSlO6ccfOgjRd');
   xhr.setRequestHeader('Accept', 'text/plain');
@@ -95,20 +94,16 @@ $.ajax({
     var lon = places.lon;
     var info = showInfo(places);
     
-     var marker = new L.marker([lat, lon]).addTo(map);
+    marker = new L.marker([lat, lon]).addTo(map);
    
-     marker.bindPopup(info, {
+    marker.bindPopup(info, {
         closeButton: false,
         minWidth: 320
       });
-     
     });
   });
 };
 
-
-
-  
   // Slider Functions
 var mySlider = $('#radius').slider();
 
@@ -128,29 +123,24 @@ $(document).ready(function() {
   initialize();
   
   // Get activity selected
- $('controls').on('click', '#bike #hike', function () {
-    if($(this).hasClass('active')){
-        $(this).removeClass('active')
-    } else {
-        $(this).addClass('active')
-    }
-  
-
-    if ($('#hike').hasClass('active')) {
-          activity = "hiking";
-      } else if 
-        ($('#bike').hasClass('active')) {
+ $('.controls').on('click', '#bike, #hike', function () {
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+    
+    if ($('#bike').hasClass('active')) {
           activity = "mountain biking";
+      } else if 
+        ($('#hike').hasClass('active')) {
+          activity = "hiking";
       }
     });
 
   // Get Trails
   $('.controls').on('click', '#find-trails', function(e) {
     e.preventDefault();
+    $('.leaflet-shadow-pane').html('');
+    $('.leaflet-marker-pane').html('');
     var inputAddress = $('#address').val();
     geoCode(inputAddress);
   });
-  
-
-  
-}());
+});
