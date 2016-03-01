@@ -17,25 +17,16 @@
 
   </head>
   <body>
-    
-    <!-- <nav class="navbar navbar-default">
-      <div class="container-fluid"> -->
-    <div class="wrapper">
+  
+  <div class="container-fluid">
     <div class="row">
-    
-    <div class="col-xs-2 left">
+      <div class="col-md-3">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#"><h3>GetOutside<br><small>Let us help plan your next adventure!</small></h3></a>
         </div>
         
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-left controls">
+       <div class="controls">
+          <ul class="nav navbar-nav controls">
             <li><h4>Choose Activity</h4></li>
             <li>
               <button class="btn btn-default btn-xs" id="bike">
@@ -62,52 +53,22 @@
             <li>
               <button id="find-trails" type="submit" class="btn btn-primary btn-lg">Find Trails</button>
             </li>
-
-
           </ul>
         </div>
       </div>
-    
-<div class="col-xs-8 col-md-10 content">
-<div class="map" id="map"> </div>
-    </div>  
-    </div>
-    </div>
-    
-      <div class="container hidden">
-        <div class="row">
-          <div class="controls col-xs-6 col-xs-offset-.2 col-sm-5 col-sm-offset-.5 col-md-4 col-md-offset-.5">
-            <h3 class="text-center">GetOutside<br><small>Let us help plan your next adventure!</small></h3>
-            <div class="sport col-md-6 col-md-offset-3">
-              <ul class="list-unstyled list-inline">
-                <li>
-                  <button class="btn btn-default btn-xs" id="bike">
-                  <img src="images/bike.png"> 
-                  </button>
-                </li>
-                <li>
-                  <button class="btn btn-default btn-xs"  id="hike">
-                  <img src="images/hike.png"> 
-                  </button>
-                </li>
-              </ul>
-              </div>
-              <div class="col-md-11 col-md-offset-1">
-              <form>
-                <div class="form-group text-left">
-                  <label for="address">Address</label>
-                  <input type="text" class="form-control" id="address" placeholder="Address">
-                </div>
-              
-                <input id="radius" data-slider-id='ex1Slider' type="text" data-slider-min="10" data-slider-max="200" data-slider-step="1" data-slider-value="50" data-slider-tooltip="hide"/>
-                <p id="search-radius">Search Radius <strong id="radius-num">50</strong> miles</p>
-              
-                <button id="find-trails" type="submit" class="btn btn-primary btn-lg">Find Trails</button>
-            </form>
-            </div>
-          </div>
-        </div>
+
+      
+      <div class="col-md-9">
+        <div class="map" id="map"></div>
       </div>
+    </div>
+  </div>
+     
+   
+ 
+    
+     
+     
     
 
   

@@ -13,23 +13,17 @@ html {
 
 .map {
   height:100%;
-
-
+  margin: 0;
 }
 
-.navbar {
-    position: fixed;
-  z-index: 999999;
- 
-  }
- .nav {
-  height: 100px;
+.container-fluid, .col-md-9, .row {
+  height: 100%;
   margin: 0;
-  
- }
- .navbar-default {
-  margin: 0;
- }
+  padding: 0;
+  border:0;
+}
+
+
 
 .navbar-header h3{
   margin: 0;
