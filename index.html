@@ -8,7 +8,7 @@
     <title>GetOutside - Let's find your next adventure!</title>
 
    
-    <link href='https://fonts.googleapis.com/css?family=Knewave|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Merriweather:900|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -20,60 +20,55 @@
   
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#"><h3>GetOutside<br><small>Let us help plan your next adventure!</small></h3></a>
+      <div class="col-sm-3 col-md-3">
+        <div class="logo text-center">
+          <a class="outside-logo" href="#"><h3>GetOutside</h3></a>
+          <h5>Let's plan your next adventure!</h5>
         </div>
         
        <div class="controls">
-          <ul class="nav navbar-nav controls">
-            <li><h4>Choose Activity</h4></li>
+          <ul class="nav navbar-stacked">
             <li>
-              <button class="btn btn-default btn-xs" id="bike">
+              <div class="activity text-center">
+                <h4>Choose Activity</h4>
+                <button class="btn btn-default btn-xs" id="bike">
                 <img src="images/bike.png"> 
-              </button>
-            </li>
-            <li>
-              <button class="btn btn-default btn-xs"  id="hike">
+                </button>
+                <button class="btn btn-default btn-xs"  id="hike">
                 <img src="images/hike.png"> 
-              </button>
+                </button>
+              </div>
             </li>
-            <li><h4>Address</h4></li>
             <li>
-              <div class="form-group">
-                <input type="text" class="form-control" id="address" placeholder="Address">
+              <div class="address">
+                <h4>Address</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="address" placeholder="Address">
+                </div>
               </div>
             </li> 
             <li>
-              <div class="search-distance">
+              <div class="search-distance text-center">
                 <input id="radius" data-slider-id='ex1Slider' type="text" data-slider-min="10" data-slider-max="200" data-slider-step="1" data-slider-value="50" data-slider-tooltip="hide"/>
                 <p id="search-radius">Search Radius <strong id="radius-num">50</strong> miles</p>
               </div>
             </li>
-            <li>
-              <button id="find-trails" type="submit" class="btn btn-primary btn-lg">Find Trails</button>
+            <li class="find-trails">
+              <div class="text-center">
+                <button id="find-trails" type="submit" class="btn btn-primary btn-lg">Find Trails</button>
+              </div>
             </li>
           </ul>
         </div>
       </div>
 
       
-      <div class="col-md-9">
+      <div class="col-sm-3 col-md-9">
         <div class="map" id="map"></div>
       </div>
     </div>
   </div>
      
-   
- 
-    
-     
-     
-    
-
-  
-    
-
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  

@@ -48,50 +48,25 @@ var starWidth = function(rating) {
 
 // Create popup content
 var showInfo = function(places) {
-  // var result = $('.template .popup').clone();
   
-  // var trail = result.find('#title');
-  // trail.attr('h3', places.name);
-
-  // var thumb = result.find('#thumb');
-  // thumb.attr('src', places.activities[0].thumbnail); 
-
-  // var description = result.find('#trail-description');
-  // description.attr('p', places.activities[0].description); 
-
-  // var distance = result.find('#distance');
-  // distance.text(places.activities[0].length + ' Miles');
-
-  // var stars = result.find('.stars');
-  // stars.html(numStars);
-
-  // var numStars = $(function() {
-    // $('span.stars').stars(places.activities[0].rating);
-  // });
-  console.log(places);
   var trail = '<div class="popup"><div id="title"><h3>' + places.name + '</h3></div>';
   var thumb = '<div id="thumb"><img id="thumbnail" src="' + places.activities[0].thumbnail + '"></div>';
   var distance = '<div id="stats"><ul class="list-unstyled list-inline"><li id="distance"><h5>' + places.activities[0].length + ' Miles</h5></li>';
   var rating = starWidth(places.activities[0].rating);
   var stars = '<li><div class="rating_bar"><div  class="rating" style="width:' + rating + ';"></div></div></li>';
   var description = '<div id="description"><h4>Description</h4><p id="trail-description">' + places.activities[0].description + '</p></div></div>';
-    
-  var result = trail + thumb + distance + stars + description;
   
+  if (places.activities[0].thumbnail == null) { 
+    var result = trail + distance + stars + description;
+   } else {
+    var result = trail + thumb + distance + stars + description;
+  }
   return result;
 
 };
 
 
-// Get activity selected
- function activity() {
-  if ($('#hike').click('clicked')) {
-    activity = "hiking";
-  } else if 
-    ($('#bike').click('clicked')) {
-      activity = "mountain biking";
-    }
-  };
+
 
 // Trails request
 var getTrails = function(latitude, longitude) {
@@ -149,8 +124,27 @@ $('.controls').on('slide', mySlider, function() {
 
 
 $(document).ready(function() {
+  // Build Map
   initialize();
-  // navigator.geolocation.getCurrentPosition(initialize);
+  
+  // Get activity selected
+ $('controls').on('click', '#bike #hike', function () {
+    if($(this).hasClass('active')){
+        $(this).removeClass('active')
+    } else {
+        $(this).addClass('active')
+    }
+  
+
+    if ($('#hike').hasClass('active')) {
+          activity = "hiking";
+      } else if 
+        ($('#bike').hasClass('active')) {
+          activity = "mountain biking";
+      }
+    });
+
+  // Get Trails
   $('.controls').on('click', '#find-trails', function(e) {
     e.preventDefault();
     var inputAddress = $('#address').val();
