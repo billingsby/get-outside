@@ -37,6 +37,7 @@ var geoCode = function(inputAddress) {
   });
 };
 
+// Google Geolocation API Key AIzaSyAEjZLscqodChd4PALGu9SV1Ot3SwTIH98
 
 var starWidth = function(rating) {
   var result = Math.round((rating/5)*100);
@@ -70,19 +71,19 @@ var showInfo = function(places) {
 // Trails request
 var getTrails = function(latitude, longitude) {
 var params = {
-  'q[activities_activity_type_name_eq]': activity,
+  // 'q[activities_activity_type_name_eq]': activity,
   lat: latitude,
   lon: longitude,
   radius: radius
 }
 
 function setHeader(xhr) {
-  xhr.setRequestHeader('X-Mashape-Key', '4YanT409HXmshDOtn4QkTe1DNY33p1EVI2VjsnSlO6ccfOgjRd');
-  xhr.setRequestHeader('Accept', 'text/plain');
+  xhr.setRequestHeader('X-Mashape-Key: VulSm4HnjbmshLEx7fwnu5mRk0Qcp1yZyzFjsneibRFOUNRzdA');
+  xhr.setRequestHeader('Accept', 'application, json');
 }
 
 $.ajax({
-    url: "https://trailapi-trailapi.p.mashape.com/",
+    url: 'https://trailapi-trailapi.p.mashape.com/trails/explore/',
     beforeSend: setHeader,
     data: params,
     type: "GET",
@@ -95,6 +96,7 @@ $.ajax({
     var info = showInfo(places);
     
     marker = new L.marker([lat, lon]).addTo(map);
+    console.log(result.status, result.headers, result.body);
    
     marker.bindPopup(info, {
         closeButton: false,
